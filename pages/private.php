@@ -1,5 +1,7 @@
 <?php
-$link = connect();
+//$link = connect();
+$link = new PDO("mysql:host=localhost", "root", "dron0702");
+
 echo '<form action="index.php?page=5" method="post" enctype="multipart/form-data" class="input-group">';
 echo '<select name="userid">';
 $select = 'SELECT * from users where roleid = 2 order by login';

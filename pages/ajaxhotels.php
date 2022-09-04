@@ -1,6 +1,7 @@
 <?php
 include_once 'functions.php';
-$link = connect();
+//$link = connect();
+$link = new PDO("mysql:host=localhost", "root", "dron0702");
 $hid = $_GET['hid'];
 $select = 'select countries.country coname, cities.city ciname, hotels.hotel hotname,
         hotels.cost price, hotels.stars stars, hotels.id hid from hotels

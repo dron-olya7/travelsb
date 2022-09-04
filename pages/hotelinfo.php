@@ -14,7 +14,9 @@
 include_once "functions.php";
 if (isset($_GET['hotel'])) {
     $hotel = $_GET['hotel'];
-    $link = connect();
+    //$link = connect();
+    $link = new PDO("mysql:host=localhost", "root", "dron0702");
+
     $select = 'select * from hotels where id=' . $hotel;
     $res = mysqli_query($link, $select);
     $row = mysqli_fetch_array($res, MYSQLI_ASSOC);

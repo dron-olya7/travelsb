@@ -1,7 +1,8 @@
 <h2>Commets</h2>
 <hr>
 <?php
-$link = connect();
+//$link = connect();
+$link = new PDO("mysql:host=localhost", "root", "dron0702");
 echo '<form action="index.php?page=2" method="post" class="input-group">';
 echo '<select name="hotel">';
 $select = 'select countries.country, cities.city, hotels.hotel, hotels.id, users.id

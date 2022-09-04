@@ -2,7 +2,9 @@
 <div class="row">
   <div class="col-sm-6 col-md-6 col-lg-6 left">
     <?
-    $link = connect();
+    //$link = connect();
+    $link = new PDO("mysql:host=localhost", "root", "dron0702");
+
     $selectruser = 'SELECT * from users where roleid = 2';
     $res = mysqli_query($link , $selectruser);
     echo '<form action="index.php?page=5" method="post" enctype="multipart/form-data" class="input-group">';

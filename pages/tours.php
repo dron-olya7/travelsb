@@ -1,20 +1,49 @@
 <h2>Select Tours</h2>
 <hr>
 <?php
-$link = connect();
-echo '<div class="form-inline">';
-echo '<select name="countyid" id="countyid" onchange="showCities(this.value);">';
-echo '<option value="0">select country</option>';
-$res = mysqli_query($link, 'select * from countries');
-while ($row = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
-    echo '<option value="' . $row['id'] . '">' . $row['country'] . '</option>';
+
+try {
+    $link = new PDO("mysql:host=localhost; dbname=travelsdb", "root", "dron0702");
+    $sqlcountry = "select * from countries";
+    $rescountry = $link->query($sqlcountry);
+    echo '<select name="countyid" id="countyid" onchange="showCities(this.value);>';
+    echo '<option value="0">select country...</option>';
+    while ($row = $rescountry->fetch()) {
+        echo '<option value="' . $row['id'] . '">' . $row['country'] . '</option>';
+    }
+    echo '</select>';
+    $sqlcity = "select * from cities";
+    $rescity = $link->query($sqlcity);
+    echo '<select name="cityid" id="citylist" onchange="showHotels(this.value)">';
+    echo '<option value="0">select city...</option>';
+    while ($row = $rescity->fetch()) {
+        echo '<option value="' . $row['id'] . '">' . $row['city'] . '</option>';
+    }
+    echo'</select>';
+    echo '<div id="hotels"></div>';
+} catch (PDOException $e) {
+    echo "Database error: " . $e->getMessage();
 }
-echo '</select>';
-//список городов
-echo '<select name="cityid" id="citylist" onchange="showHotels(this.value)"></select>';
-echo '</div>';
-//список отелей
-echo '<div id="hotels"></div>';
+
+
+
+
+
+
+//$link = connect();
+//echo '<div class="form-inline">';
+//echo '<select name="countyid" id="countyid" onchange="showCities(this.value);">';
+//echo '<option value="0">select country</option>';
+//$res = mysqli_query($link, 'select * from countries');
+//while ($row = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
+//    echo '<option value="' . $row['id'] . '">' . $row['country'] . '</option>';
+//}
+//echo '</select>';
+////список городов
+//echo '<select name="cityid" id="citylist" onchange="showHotels(this.value)"></select>';
+//echo '</div>';
+////список отелей
+//echo '<div id="hotels"></div>';
 
 
 

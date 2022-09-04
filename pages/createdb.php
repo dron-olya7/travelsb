@@ -1,6 +1,9 @@
 <?php
 include_once "functions.php";
-$link = connect();
+//$link = connect();
+
+$link = new PDO("mysql:host=localhost", "root", "dron0702");
+
 
 $ct1 = 'create table countries(id int not null auto_increment primary key,
                                 country varchar(64) unique) default charset="utf8"';

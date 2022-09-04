@@ -1,16 +1,26 @@
 <?php
-function connect(
-    $host = 'localhost',
-    $user = 'root',
-    $pass = 'dron0702',
-    $dbname = 'travelsdb'
-)
-{
-    $link = mysqli_connect($host, $user, $pass) or die('connection error');
-    mysqli_select_db($link, $dbname) or die('DB open error');
-    mysqli_query($link, "set names 'utf8'");
-    return $link;
+//function connect(
+//    $host = 'localhost',
+//    $user = 'root',
+//    $pass = 'dron0702',
+//    $dbname = 'travelsdb'
+//)
+//{
+//    $link = mysqli_connect($host, $user, $pass) or die('connection error');
+//    mysqli_select_db($link, $dbname) or die('DB open error');
+//    mysqli_query($link, "set names 'utf8'");
+//    return $link;
+//}
+
+
+try {
+    $link = new PDO("mysql:host=localhost", "root", "dron0702");
+    $link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    //echo "Connect!";
+} catch (PDOException $e) {
+    echo "Connection failed: " . $e->getMessage();
 }
+
 
 function register($login, $pass, $email)
 {
@@ -55,9 +65,9 @@ function login($name, $pass)
         return false;
     }
 
-    $link = connect();
+    $link = new PDO("mysql:host=localhost", "root", "dron0702");
     $select = 'select * from users where login="'.$name.'" and pass="'.md5($pass).'"';
-    $res = mysqli_query($link, $select);
+    $res = mysqli_query($select);
     if ($row = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
         $_SESSION['ruser'] = $name;
         if ($row['roleid'] == 1) {
